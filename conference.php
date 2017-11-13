@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Add Conference</title>
+<title>Add Article</title>
 	<!-- Meta tags -->
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -106,7 +106,7 @@
 
          <div class="form-control-w3l">
          
-               <input type="text" id="name" name="name" placeholder="Your name...">
+               <input type="text" id="name" name="name" placeholder="name conference">
          </div>
 
 		 <div class="form-control-w3l">	

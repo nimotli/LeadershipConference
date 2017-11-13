@@ -1,5 +1,5 @@
   <?php
-$pdo = new PDO ('mysql:host=localhost;dbname=base_gc;charset=utf8', 'root', '');
+$pdo = new PDO ('mysql:host=localhost;dbname=base_gs;charset=utf8', 'root', '');
 $reponse =$pdo->query("SELECT * FROM conference");
 $data=$reponse->fetchAll();
 ?>
@@ -99,10 +99,10 @@ $data=$reponse->fetchAll();
         </header>
 
         <!-- Sections -->
-       <form id="conference" method="get" action="info.php">
+       
 
         <!-- Sections -->
-        <section id="gallery" class="sections">
+        <section id="gallery" class="sections container">
             <div class="container text-center">
 
                 <div class="heading-content">
@@ -127,12 +127,12 @@ $data=$reponse->fetchAll();
             </div>
 
         </div><br><br><br><br>
-
+              
   <?php
    }
 			?></section>
       
-</form>
+
      
        
         <!-- Sections -->

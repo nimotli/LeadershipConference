@@ -1,6 +1,6 @@
 
   <?php
-$pdo = new PDO ('mysql:host=localhost;dbname=base_gc;charset=utf8', 'root', '');
+$pdo = new PDO ('mysql:host=localhost;dbname=base_gs;charset=utf8', 'root', '');
     $code=$_GET['code'];
        $reponse2 =$pdo->query("SELECT * FROM conference WHERE id_conf=$code");
 $data2=$reponse2->fetchAll();
@@ -88,7 +88,7 @@ $data2=$reponse2->fetchAll();
  
 
         <!-- END ITEM -->
-<section id="gallery" class="sections">
+<section id="gallery" class="sections container">
             <div class="container text-center">
 
                 <div class="heading-content">
@@ -97,7 +97,7 @@ $data2=$reponse2->fetchAll();
                     </div>
 <?php  foreach ($data2 as $data2) {
     ?>
-<div class="row">
+<div class="row ">
 
             <div class="col-lg-3 ">
                 <a href="#">
@@ -111,7 +111,7 @@ $data2=$reponse2->fetchAll();
                 <p><b>NOM ET PRENOM DU PRISIDENT : </b><?php echo($data2['nom_president']) ?></p>
                 <p><b>DETAIL DE LA CONFERENCE : </b><?php echo($data2['rapport_conf']) ?></p>
                 <p><b>DUREE DE CONFERENCE(h) : </b><?php echo($data2['duree_conf']) ?></p>
-                <a href="index.php?code=<?php echo($data2['id_conf']) ?>">Return to Menu</a>
+                <a href="home.php?code=<?php echo($data2['id_conf']) ?>">Return to Menu</a>
 
             </div>
 
