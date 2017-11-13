@@ -941,3 +941,9 @@ textarea::-ms-input-placeholder
     color: #fff;
     transform:scale(1.1);
 }	
+
+#conferenceform p
+{
+    color: white ;
+
+}

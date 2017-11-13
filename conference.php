@@ -101,17 +101,17 @@
 
 	
     <div> &nbsp; </div>
- <div class="appointment-w3">
-    <form action="#" method="post">
+ <div class="appointment-w3" id="conferenceform">
+     <form action="#" method="post">
 
          <div class="form-control-w3l">
          
-               <input type="text" id="name" name="name" placeholder="name conference">
+               <input type="text" id="name" name="nameConference" placeholder="Name conference">
          </div>
 
 		 <div class="form-control-w3l">	
 			
-				<input type="email" id="email" name="email" placeholder="Mail@example.com" title="Please enter a Valid Email Address" required="">
+				<input type="text" id="email" name="duree" placeholder="Duration" title="The duration of the conference" required="">
 		 </div>
 
          <div class="form-control-w3l">	
@@ -119,19 +119,25 @@
 				<input type="text" id="orgn" name="nom article" placeholder="Article name" title="Please enter article name" required="">
 		 </div>
 
-		 
-		 <p> &copy; Description of your article: </p>
 		 <div> &nbsp; </div>
+		 <p> &copy; Description of your article: </p>
+		 
 		 <div class="form-control-w3l">
-               <textarea id="message" name="text" placeholder="Article description..."></textarea>
+               <textarea id="message" name="text" placeholder="Conference description..."></textarea>
          </div>
          <div> &nbsp; </div>
          <div class="form-control-w3l">	
 			
-				<input type="file" id="PDFFILE" name="PdfFile" required="">
+				<input type="file" id="imagefile" name="imagefile" required="">
 		 </div>
+         <div> &nbsp; </div>
+		 <p> &copy; Repport of your conference : </p>
+		 <div class="form-control-w3l">
+               <textarea id="message" name="text" placeholder="Conference repport..."></textarea>
+         </div> 
+
 		 <div> &nbsp; </div>
- <input type="submit" value="SEND ARTICLE">
+ <input type="submit" value="SEND REQUEST ">
 </form>
    </div>
    
