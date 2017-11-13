@@ -52,6 +52,7 @@
         <!--Theme Responsive css-->
         <link rel="stylesheet" href="assets/css/responsive.css" />
 
+		
         <script src="assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     
 
@@ -101,12 +102,12 @@
 
 	
     <div> &nbsp; </div>
- <div class="appointment-w3" id="conferenceform">
+ <div class="appointment-w3" id="confForm">
      <form action="#" method="post">
 
          <div class="form-control-w3l">
          
-               <input type="text" id="name" name="nameConference" placeholder="Name conference">
+               <input type="text" id="name" name="nameConference" placeholder="Conference's name">
          </div>
 
 		 <div class="form-control-w3l">	
@@ -114,11 +115,10 @@
 				<input type="text" id="email" name="duree" placeholder="Duration" title="The duration of the conference" required="">
 		 </div>
 
-         <div class="form-control-w3l">	
+		 <div class="form-control-w3l">	
 			
-				<input type="text" id="orgn" name="nom article" placeholder="Article name" title="Please enter article name" required="">
+				<input type="file" id="imagefile" name="imagefile" required="">
 		 </div>
-
 		 <div> &nbsp; </div>
 		 <p> &copy; Description of your article: </p>
 		 
@@ -126,17 +126,17 @@
                <textarea id="message" name="text" placeholder="Conference description..."></textarea>
          </div>
          <div> &nbsp; </div>
-         <div class="form-control-w3l">	
-			
-				<input type="file" id="imagefile" name="imagefile" required="">
-		 </div>
-         <div> &nbsp; </div>
 		 <p> &copy; Repport of your conference : </p>
 		 <div class="form-control-w3l">
                <textarea id="message" name="text" placeholder="Conference repport..."></textarea>
          </div> 
 
-		 <div> &nbsp; </div>
+		<div> &nbsp; </div>
+		<select class="selectpicker" >
+		  <option>Here is the first option</option>
+		  <option>The second option</option>
+		  <option>The third option</option>
+		</select>
  <input type="submit" value="SEND REQUEST ">
 </form>
    </div>
