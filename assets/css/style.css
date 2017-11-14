@@ -990,3 +990,8 @@ textarea::-ms-input-placeholder
     font-size: 15px;
     font-weight: normal;
  }
+ header
+ {
+     margin-bottom: 40px;
+ }
+ 

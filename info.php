@@ -92,7 +92,7 @@ $data2=$reponse2->fetchAll();
             <div class="container text-center">
 
                 <div class="heading-content">
-                    <h3>Informations de la Conference</h3>                
+                    <h3>Conference's informations</h3>                
                 </div>
                     </div>
 <?php  foreach ($data2 as $data2) {
@@ -108,9 +108,9 @@ $data2=$reponse2->fetchAll();
             <div class="col-lg-7 col-md-7">
                 <h3><?php echo($data2['nom_conf']) ?></h3>
                 <h4></h4>
-                <p><b>NOM ET PRENOM DU PRISIDENT : </b><?php echo($data2['nom_president']) ?></p>
-                <p><b>DETAIL DE LA CONFERENCE : </b><?php echo($data2['rapport_conf']) ?></p>
-                <p><b>DUREE DE CONFERENCE(h) : </b><?php echo($data2['duree_conf']) ?></p>
+                <p><b>NAME OF THE PRESIDENT : </b><?php echo($data2['nom_president']) ?></p>
+                <p><b>CONFERENCE'S DETAILS : </b><?php echo($data2['rapport_conf']) ?></p>
+                <p><b>CONFERENCE'S DURATION (h) : </b><?php echo($data2['duree_conf']) ?></p>
                 <a href="home.php?code=<?php echo($data2['id_conf']) ?>">Return to Menu</a>
 
             </div>

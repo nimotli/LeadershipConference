@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="stylesheet" href="dist/css/bootstrap-select.css">
 <title>Add Article</title>
 	<!-- Meta tags -->
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -34,7 +35,7 @@
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-        <!--        <link rel="stylesheet" href="assets/css/bootstrap-theme.min.css">-->
+        <!--<link rel="stylesheet" href="assets/css/bootstrap-theme.min.css">-->
 
 
         <!--For Plugins external css-->
@@ -55,7 +56,14 @@
 		
         <script src="assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     
+		<script type = "text/javascript" 
+         src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
+      <script type = "text/javascript">
+         $(document).ready(function(){
+				$('.selectpicker').selectpicker();
+				});
+      </script> 
 </head>
 <body>
 	
@@ -103,60 +111,159 @@
 	
     <div> &nbsp; </div>
  <div class="appointment-w3" id="confForm">
-     <form action="#" method="post">
+     <form action="" method="post" enctype="multipart/form-data">
 
          <div class="form-control-w3l">
          
-               <input type="text" id="name" name="nameConference" placeholder="Conference's name">
+               <input type="text" id="name" name="nameConference" placeholder="Conference's name" required="">
          </div>
 
 		 <div class="form-control-w3l">	
 			
-				<input type="text" id="email" name="duree" placeholder="Duration" title="The duration of the conference" required="">
+				<input type="text" id="email" name="duree" placeholder="Duration" title="The duration of the conference" required="" onkeypress="return isNumberKey(event)">
 		 </div>
-
+		 <div> &nbsp; </div>
+		 <p> &copy; Image of your conference: </p>
 		 <div class="form-control-w3l">	
 			
-				<input type="file" id="imagefile" name="imagefile" required="">
+				<input type="file" id="imagefile" name="imagefile" accept="image/*" >
 		 </div>
 		 <div> &nbsp; </div>
 		 <p> &copy; Description of your article: </p>
 		 
 		 <div class="form-control-w3l">
-               <textarea id="message" name="text" placeholder="Conference description..."></textarea>
+               <textarea id="message" name="confDescription" placeholder="Conference description..." required=""></textarea>
          </div>
          <div> &nbsp; </div>
 		 <p> &copy; Repport of your conference : </p>
 		 <div class="form-control-w3l">
-               <textarea id="message" name="text" placeholder="Conference repport..."></textarea>
+               <textarea id="message" name="confRepport" placeholder="Conference repport..." required=""></textarea>
          </div> 
 
 		<div> &nbsp; </div>
-		<select class="selectpicker" >
-		  <option>Here is the first option</option>
-		  <option>The second option</option>
-		  <option>The third option</option>
+		<select name="select1[]" id="" multiple="multiple">
+		<?php 
+			$servername = "localhost";
+			$username = "root";
+			$password = "";
+			$dbname = "base_gs";
+			$conn = new mysqli($servername, $username, $password,$dbname);
+			if ($conn->connect_error) {
+				die("Connection failed: " . $conn->connect_error);
+			}
+			$req="SELECT userID,name,last_name FROM users";
+			$result = $conn->query($req);
+			if ($result->num_rows > 0) 
+			{
+				while($row = $result->fetch_assoc()) 
+				{
+					echo '<option value="'.$row["userID"].'">'.$row["name"]. ' ' . $row["last_name"].'</option>';
+				}
+			}
+			$conn->close();
+		?>
 		</select>
- <input type="submit" value="SEND REQUEST ">
+	  
+		
+ <input type="submit" name ="request" value="SEND REQUEST ">
+ <?php
+
+	if( isset($_POST['request']))
+	{
+			$servername = "localhost";
+			$username = "root";
+			$password = "";
+			$dbname = "base_gs";
+			$conn = new mysqli($servername, $username, $password,$dbname);
+			if ($conn->connect_error) {
+				die("Connection failed: " . $conn->connect_error);
+			}
+			
+
+			$target_dir = "assets/images/";
+			$target_file = $target_dir . basename($_FILES["imagefile"]["name"]);
+			$imagename=time() . basename($_FILES["imagefile"]["name"]);
+			$uploadOk = 1;
+			if(isset($_POST["submit"])) 
+			{
+				$check = getimagesize($_FILES["imagefile"]["tmp_name"]);
+				if($check !== false) {
+					$uploadOk = 1;
+				} 
+				else 
+				{
+					echo "File is not an image.";
+					$uploadOk = 0;
+				}
+
+			}
+			if ($uploadOk == 0) {
+				echo "Sorry, your file was not uploaded.";
+			} 
+			else 
+			{
+				if (move_uploaded_file($_FILES["imagefile"]["tmp_name"], $target_file)) 
+				{
+					rename($target_file, $target_dir.$imagename);
+				} 
+			}
+
+			
+
+			$duree=$_POST['duree'];
+			$title=$_POST['nameConference'];
+			$description=$_POST['confDescription'];
+			$repport=$_POST['confRepport'];
+			$sql = "INSERT INTO conference(nom_conf, desc_conf, duree_conf,statue,rapport_conf,photo_conf,id_president)
+			VALUES ('$title', '$description', $duree,0,'
+			$repport','$imagename',".time().")";
+			
+			if ($conn->query($sql) === TRUE) {
+			} 
+			$confidreq="SELECT max(id_conf) FROM conference";
+			$result = $conn->query($confidreq);
+			$idconfarray = $result->fetch_array(MYSQLI_NUM);
+			$idconf=$idconfarray[0];
+			foreach ($_POST['select1'] as $selectedOption)
+			{
+				$req="INSERT INTO relecteur VALUES ($idconf,$selectedOption)";
+				mysqli_query($conn,$req);
+				$updateReq = "UPDATE table user SET user_relecteur = 1 WHERE userID=$selectedOption";
+				mysqli_query($conn,$updateReq);
+			}
+			
+			$conn->close();
+	}
+ ?>
 </form>
+
    </div>
    
     <div class="copy">
     <p>&copy;2018 Leadrship Conference</p>
 </div>
 
- 
+			<script>
+			function isNumberKey(evt)
+			{
+				var charCode = (evt.which) ? evt.which : event.keyCode
+				if (charCode > 31 && (charCode < 48 || charCode > 57))
+					return false;
+				return true;
+			}
+			</script>
+			<script>
+					$(function() {
+					$( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker();
+					});
+			</script>
 		<!-- js -->
-  <script type='text/javascript' src='js/jquery-2.2.3.min.js'></script>
-<!-- //js -->
-<!-- Calendar -->
-				<link rel="stylesheet" href="css/jquery-ui.css" />
-				<script src="js/jquery-ui.js"></script>
-				  <script>
-						  $(function() {
-							$( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker();
-						  });
-				  </script>
+  		<script type='text/javascript' src='js/jquery-2.2.3.min.js'></script>
+		<!-- //js -->
+		<!-- Calendar -->
+		<link rel="stylesheet" href="css/jquery-ui.css" />
+		<script src="js/jquery-ui.js"></script>
+			
 			<!-- //Calendar -->
 			<!-- Time -->
 			<script type="text/javascript" src="js/wickedpicker.js"></script>

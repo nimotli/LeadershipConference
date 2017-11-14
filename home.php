@@ -106,23 +106,23 @@ $data=$reponse->fetchAll();
             <div class="container text-center">
 
                 <div class="heading-content">
-                    <h3>LISTE CONERENCES</h3>                
+                    <h3>Ongoing conferences</h3>                
                 </div>
                     </div>
 <?php  foreach ($data as $data) {
     ?>
-<div  class="row">
+<div  class="row" style="border-bottom: 1px solid #bbb; padding-bottom: 15px;">
 
             <div class="col-lg-3 ">
                 <a href="#">
-                    <img class="img-responsive" src="assets\images\<?php echo $data['photo_conf'] ?>" >
+                    <img src="assets\images\<?php echo $data['photo_conf'] ?>" style="width: auto; height: 30%;">
                 </a>
             </div>
 
             <div class="col-lg-7 col-md-7">
-                <h3><?php echo($data['nom_conf']) ?></h3>
+                <h3 style="color:#555;"><b><?php echo($data['nom_conf']) ?></b></h3>
                 <h4></h4>
-                <p><?php echo($data['desc_conf']) ?></p>
+                <p style="color:#777;"><?php echo($data['desc_conf']) ?></p>
                 <a href="info.php?code=<?php echo($data['id_conf']) ?>">View Detail</a>
             </div>
 
